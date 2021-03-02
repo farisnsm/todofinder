@@ -4,7 +4,7 @@ const folderPath = '.'; //directory to search
 
 async function main(){
     const list = await findtodo(folderPath);
-    console.log("Final list");
+    console.log("Final xxx list");
     console.log(list);
 }
 

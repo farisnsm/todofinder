@@ -11,6 +11,6 @@ When running in residing directory
 Running in current active directory
 ![image](https://user-images.githubusercontent.com/79860509/109804354-1de0b300-7c5d-11eb-89a4-b19cd640cd08.png)
 
-Specifying target directory to search
+Specifying target directory to search >>> node todofinder.js "directory-to-search"
 ![image](https://user-images.githubusercontent.com/79860509/109804577-5d0f0400-7c5d-11eb-81ce-0220e0dbf5b6.png)
 

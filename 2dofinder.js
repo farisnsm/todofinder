@@ -4,8 +4,8 @@ const folderPath = '.'; //directory to search
 
 async function main(){
     const list = await findtodo(folderPath);
-    console.log("Final xxx list");
-    console.log(list);
+    console.log("Final list");
+    return(list);
 }
 
 async function findtodo(dir){
@@ -23,7 +23,12 @@ async function findtodo(dir){
             //subDirArray.push(dir+"/"+arr[i]);
             ListOfItem.push(await findtodo(dir+"/"+arr[i]));
         } else {
-            ListOfItem.push(arr[i])
+            const filePathName = dir+"/"+arr[i];
+            const arrayOfTODOonSingleFile = getArrayOfTODOonSingleFile(filePathName);
+            // fs.readFile(dir+"/"+arr[i], 'utf8', function(err, data) {
+            //
+            // })
+            ListOfItem.push(arrayOfTODOonSingleFile)
         }
     }
 
@@ -35,9 +40,17 @@ async function findtodo(dir){
 
 
     //console.log(list);
-    return Promise.resolve(ListOfItem);
+    return Promise.resolve(ListOfItem.flat(1));
 }
 
-main();
+function getArrayOfTODOonSingleFile(filePathName){
+    let todoArrayList = [];
+    //TODO: populate the list
+    todoArrayList.push("sample:"+filePathName);
+    return todoArrayList;
+}
+
+
+console.log(main())
 
 

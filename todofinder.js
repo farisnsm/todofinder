@@ -1,87 +1,39 @@
-const fs = require('fs')
+var fs = require('fs')
+var directory = './'
 
-const folderPath = '.' //directory to search
 
-var i = 0
-var list = [];
-var globalList = [];
-
-async function main(folderPath){
-    console.log("start");
-    findtodo(folderPath);
-    while(i!=-1){
-        console.log("sleeping......");
-        await new Promise(r => setTimeout(r, 10));
-    }
-    console.log("end");
-    testing();
+if (process.argv.length >= 3){
+    directory = process.argv[2]
 }
+//If directory is specified when executing, the program will search that directory, else it will search the current working directory
+//(NOT NECESSARILY WHERE THE FILE RESIDES)
 
-async function findtodo(dir){
-    //await new Promise(r => setTimeout(r, 20));
-    fs.readdirSync(dir).forEach(function(P){
-        i++
-        console.log("i ==> ",i)
-        if(fs.lstatSync(dir+"/"+P).isDirectory()){
-            findtodo(dir+"/"+P);
-            i--
-            if (i == 0){
-                listing(list)
-                // console.log(list)
-                // return(list)
+
+
+function f1(dir) {
+    try{
+        const arr = fs.readdirSync(dir)
+        arr.forEach((value, index, array) =>{
+            if (fs.lstatSync(dir + "/" + value).isDirectory()) {
+                f1(dir + "/" + value)
+            } else{
+                fs.readFile(dir+"/"+value, 'utf8', function(err, data) {
+                    const split = data.split("TODO")
+                    split.pop()
+                    if(split.length>=1){
+                        var l = 0
+                        //console.table(split)
+                        split.forEach((V,I,A)=>{
+                            console.log("TODO found in " + dir+"/"+value + " on line " + (l+V.split("\n").length))
+                            l=l+V.split("\n").length-1
+                        })
+                    }
+                })
             }
-        } else {
-            fs.readFile(dir+"/"+P, 'utf8', function(err, data) {
-                if (err) {
-                    throw err;
-                    i--
-                    if (i == 0){
-                        listing(list)
-                        // console.log(list)
-                        // return(list)
-                    }
-                } else if (data.indexOf("TODO")>=0) {
-                    list.unshift("TODO found in: " + dir + "/" + P);
-                    i--
-                    if (i == 0){
-                        listing(list)
-                        // console.log(list)
-                        // return(list)
-                    }
-                } else {
-                    i--
-                    if (i == 0){
-                        listing(list)
-                        // console.log(list)
-                        // return(list)
-                    }
-                }
-            });
-        }
-    });
-
-    //console.log("end")
+        })
+    } catch (err){
+        console.log("Error: " + dir + " is not a valid directory")
+    }
 }
 
-function todoString(dir,P){
-    console.log("TODO found in: " + dir + "/" + P);
-}
-
-function listing(list){
-    console.log("listing from method 2")
-    globalList = list;
-    i=-1;
-    console.log("listing from method 2 ")
-    //testing();
-   // console.log(list)
-}
-
-function testing(){
-    console.log("globalList")
-    console.log(globalList)
-   // console.log("TODO found in: " + dir + "/" + P);
-}
-
-main(folderPath);
-// findtodo(folderPath);
-
+f1(directory)

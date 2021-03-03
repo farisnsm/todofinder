@@ -6,7 +6,7 @@ if (process.argv.length >= 3){
     directory = process.argv[2]
 }
 //If directory is specified when executing, the program will search that directory, else it will search the current working directory
-//(NOT NECESSARILY WHERE THE FILE RESIDES)
+//(NOT NECESSARILY WHERE THE FILEgfi RESIDES)
 
 
 

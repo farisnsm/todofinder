@@ -1,4 +1,4 @@
-# todofinder
+# todofinder.js
 Searches all files in a folder (including all subfolders) for the string "TODO"
 
 todofinder.js will comb through a specified directory (or the the current working directory, if target directory is not specifed) for all instances of the keyword "TODO"

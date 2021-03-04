@@ -1,7 +1,7 @@
-var fs = require('fs')
+const fs = require('fs')
 
 //List of matches found
-var list = []
+let list = []
 
 function todofinder(dir) {
     //Read directory
@@ -24,7 +24,7 @@ function todofinder(dir) {
                 split.pop()
 
                 if(split.length>=1){
-                    var line = 0
+                    let line = 0
                     split.forEach((value2,index,array)=>{
 
                         //Populate the list with any matches
@@ -39,9 +39,10 @@ function todofinder(dir) {
     })
 }
 
+//This is the main function, it includes a timeout while waiting for list to populate
 function main(path,timeOut){
-    var directory = './'
-    var timeout = 1000
+    let directory = './'
+    let timeout = 1000
     //If directory is specified when executing, the program will search that directory, else it will search the current working directory
     //(NOT NECESSARILY WHERE THE FILE RESIDES)
     if (path != ''){
@@ -57,13 +58,11 @@ function main(path,timeOut){
 
     //First check if the supplied directory (if any) is valid (exists & is a folder)
     if (fs.existsSync(directory) && fs.lstatSync(directory).isDirectory()){
-
-        //This is the main function, it includes a timeout while waiting for list to populate
+        //Begin check
         todofinder(directory)
         const listofTodos = new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve(list);
-                //console.table(list)
             }, timeout);
         });
         return(listofTodos)

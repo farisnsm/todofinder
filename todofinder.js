@@ -48,7 +48,7 @@ function main(path,timeOut){
         directory = path
     }
 
-    //By default, program will run for 5 seconds. A 2nd parameter can be called to increase or decrease this duration
+    //By default, program will run for 1 seconds. A 2nd parameter can be called to increase or decrease this duration
     if (!isNaN(timeOut)){
         timeout = timeOut
     }

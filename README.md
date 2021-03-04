@@ -8,6 +8,7 @@ Should work with most versions of NodeJS (confirmed to work with latest stable v
 
 # usage via command line
 Usage via command line is through app.js
+
 `node app.js `
 
 

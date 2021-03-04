@@ -11,7 +11,7 @@ Usage via command line is through app.js
 
 `node app.js `
 
-2 parameters can be passed, directory and search time in milliseconds (default: current working directory, 1 second)
+2 parameters can be passed: directory and search time in milliseconds (default: current working directory, 1 second)
 
  `node app.js ./test 3000`
 

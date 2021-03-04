@@ -8,14 +8,14 @@ function todofinder(dir) {
     //Read directory
     const arr = fs.readdirSync(dir)
 
-    arr.forEach((value, index, array) =>{
+    arr.forEach((value) =>{
 
         //check if each item in the directory is a file or folder
         if (fs.lstatSync(dir + "/" + value).isDirectory()) {
 
             //If folder, repeat todofinder on this folder
-            let l = todofinder(dir + "/" + value)
-            list.concat(l)
+            let todoList = todofinder(dir + "/" + value)
+            list.concat(todoList)
 
         } else{
 
@@ -44,7 +44,7 @@ function todofinder(dir) {
     return(list)
 }
 
-//This is the start point. It serves mainly to intialize and reset the list variable
+//This is the start point. It serves mainly to reset the list variable and check if the path specified (if any) is valid
 function main(path){
     let directory = './'
 

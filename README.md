@@ -24,7 +24,7 @@ Usage via command line is through app.js
 
 
 # usage in your own code
-Import todofinder into your code usin 
+Import todofinder into your code using
 
 `const todofinder = require('./todofinder.js')`
 

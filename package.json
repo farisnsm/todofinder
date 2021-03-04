@@ -4,7 +4,7 @@
   "private": true,
   "main": "todofinder.js",
   "scripts": {
-    "test": "mocha --timeout 11000"
+    "test": "mocha"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

@@ -1,11 +1,4 @@
 var fs = require('fs')
-var directory = './'
-
-//If directory is specified when executing, the program will search that directory, else it will search the current working directory
-//(NOT NECESSARILY WHERE THE FILE RESIDES)
-if (process.argv.length >= 3){
-    directory = process.argv[2]
-}
 
 //List of matches found
 var list = []
@@ -46,7 +39,20 @@ function todofinder(dir) {
     })
 }
 
-function main(directory){
+function main(path,timeOut){
+    var directory = './'
+    var timeout = 1000
+    //If directory is specified when executing, the program will search that directory, else it will search the current working directory
+    //(NOT NECESSARILY WHERE THE FILE RESIDES)
+    if (path != ''){
+        directory = path
+    }
+
+    //By default, program will run for 5 seconds. A 2nd parameter can be called to increase or decrease this duration
+    if (!isNaN(timeOut)){
+        timeout = timeOut
+    }
+
     list = []
 
     //First check if the supplied directory (if any) is valid (exists & is a folder)
@@ -57,8 +63,8 @@ function main(directory){
         const listofTodos = new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve(list);
-                console.table(list)
-            }, 5000);
+                //console.table(list)
+            }, timeout);
         });
         return(listofTodos)
 
@@ -72,5 +78,4 @@ function main(directory){
 
 }
 
-main(directory)
 module.exports = main

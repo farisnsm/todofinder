@@ -1,41 +1,26 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const todofinder = require('./todofinder.js')
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var directory = './'
+var timeout = 1000
 
-var app = express();
+//If directory is specified when executing, the program will search that directory, else it will search the current working directory
+//(NOT NECESSARILY WHERE THE FILE RESIDES)
+if (process.argv.length >= 3){
+    directory = process.argv[2]
+}
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+console.log("Searching directory: " + directory)
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+//By default, program will run for 1 seconds. A 2nd parameter can be called to increase or decrease this duration
+if (process.argv.length == 4){
+    timeout = process.argv[3]
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+}
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+console.log("Search duration set to: " + timeout + 'ms')
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-
-module.exports = app;
+async function main(){
+    const todolist = await todofinder(directory,timeout)
+    console.log(todolist)
+}
+main()

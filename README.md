@@ -43,6 +43,7 @@ main()
 
 # tests
 3 unit tests were done via mocha & chai
+
 To view:
 
 `npm run test`

@@ -15,4 +15,19 @@ Usage via command line is through app.js
 
  `node app.js ./test 3000`
 
+![image](https://user-images.githubusercontent.com/79860509/109998542-4a272d00-7d4c-11eb-9910-cbe906e8f04e.png)
 
+# usage in your own code
+Import todofinder into your code usin 
+
+`const todofinder = require('./todofinder.js')`
+
+It can then be called within an async function via a promise
+
+```
+async function main(){
+    const todolist = await todofinder('./test',3000)
+    console.log(todolist)
+}
+main()
+```

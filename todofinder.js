@@ -54,20 +54,23 @@ function main(directory){
 
         //This is the main function, it includes a timeout while waiting for list to populate
         todofinder(directory)
-        const myPromise = new Promise((resolve, reject) => {
+        const listofTodos = new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve(list);
-                //console.log(list)
+                console.table(list)
             }, 5000);
         });
-        return(myPromise)
+        return(listofTodos)
 
     } else {
 
+        //Invalid directory. Supplied directory is either not a folder or doesnt exist
+        console.log(directory + " is not a valid directory")
         return(directory + " is not a valid directory")
 
     }
 
 }
 
+main(directory)
 module.exports = main

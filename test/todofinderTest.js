@@ -18,7 +18,7 @@ describe('todofinder',function(){
 
     });
 
-    //Test case 1
+    //Test case 2
     it('todofinder should return no matches', async () => {
         const test2Result = await todofinder('./test/testcase2-no match')
         assert.typeOf(test2Result,'array')

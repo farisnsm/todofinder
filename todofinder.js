@@ -65,5 +65,5 @@ function main(path){
         return(directory + " is not a valid directory")
     }
 }
-console.log(main())
+
 module.exports = main

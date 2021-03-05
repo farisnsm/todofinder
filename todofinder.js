@@ -50,7 +50,7 @@ function main(path){
 
     //If directory is specified when executing, the program will search that directory, else it will search the current working directory
     //(NOT NECESSARILY WHERE THE FILE RESIDES)
-    if (path !== ''){
+    if (path){
         directory = path
     }
 
@@ -65,5 +65,5 @@ function main(path){
         return(directory + " is not a valid directory")
     }
 }
-
+console.log(main())
 module.exports = main
